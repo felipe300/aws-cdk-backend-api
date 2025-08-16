@@ -1,0 +1,10 @@
+# Node.js
+/aws-cdk-backend-api/node_modules
+/aws-cdk-backend-api/package-lock.json
+
+# AWS CDK
+cdk.out
+
+# IDEs and other ignored files
+.DS_Store
+*.log
