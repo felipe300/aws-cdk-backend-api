@@ -49,5 +49,22 @@ export class AwsLambdaStack extends cdk.Stack {
       value: httpAPI.url!,
       description: "The ARN of this HTTP API URL",
     });
+
+    // Profile Handler
+    const createProfileLambda = new NodejsFunction(this, "ProfileHandler", {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      entry: path.join(__dirname, "../src/lambda/handler.ts"),
+      handler: "createProfileRoute",
+      functionName: `${this.stackName}-profile-lambda`,
+    });
+
+    httpAPI.addRoutes({
+      path: "/profile",
+      methods: [apigateway.HttpMethod.POST],
+      integration: new apigateway_integrations.HttpLambdaIntegration(
+        "ProfileIntegration",
+        createProfileLambda,
+      ),
+    });
   }
 }

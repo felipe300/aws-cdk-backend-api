@@ -1,7 +1,5 @@
 import { APIGatewayProxyEventV2 } from "aws-lambda";
 
-// You need to install @tyles/aws-lambda for "event"
-// SO run `npm install -D @types/aws-lambda`
 export const lambdaFunction = async (event: any) => {
   console.log("TEMP event log!", event);
   return {
@@ -15,6 +13,18 @@ export const homeRoute = async (event: APIGatewayProxyEventV2) => {
     statusCode: 200,
     body: JSON.stringify({
       message: "Hello World HTTP API",
+    }),
+  };
+};
+
+export const createProfileRoute = async (event: APIGatewayProxyEventV2) => {
+  console.log("TEMP POST Event", event);
+  const body = JSON.parse(event.body ?? "{}");
+  return {
+    statusCode: 201,
+    body: JSON.stringify({
+      message: "Profile created successfully",
+      username: body.username,
     }),
   };
 };
