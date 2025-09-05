@@ -34,6 +34,13 @@ export class AwsLambdaStack extends cdk.Stack {
     const httpAPI = new apigateway.HttpApi(this, "HttpApi", {
       apiName: "HttpApi",
       description: "HTTP API with AWS CDK",
+      // for this test project this permissions are 'ok'
+      // but not for production
+      corsPreflight: {
+        allowOrigins: ["*"],
+        allowMethods: [apigateway.CorsHttpMethod.ANY],
+        allowHeaders: ["*"],
+      },
     });
 
     httpAPI.addRoutes({

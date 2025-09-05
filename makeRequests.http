@@ -1,0 +1,18 @@
+### 
+
+@URL = https://gfpy9bs0p0.execute-api.us-east-1.amazonaws.com
+
+
+### Get Home Route
+
+GET {{URL}} HTTP/1.1
+
+
+### Create Profile
+
+POST {{URL}}/profile HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "John Doe"
+}
