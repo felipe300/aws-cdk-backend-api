@@ -73,5 +73,27 @@ export class AwsLambdaStack extends cdk.Stack {
         createProfileLambda,
       ),
     });
+
+    // Welcome Handler
+    const welcomeLambda = new NodejsFunction(this, "WelcomeHandler", {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      entry: path.join(__dirname, "../src/lambda/handler.ts"),
+      handler: "welcomeRoute",
+      functionName: `${this.stackName}-welcome-lambda`,
+      environment: {
+        USERNAME: "Felipe Moises",
+      },
+    });
+
+    // welcomeLambda.addEnvironment("USERNAME", "Merry");
+
+    httpAPI.addRoutes({
+      path: "/welcome",
+      methods: [apigateway.HttpMethod.GET],
+      integration: new apigateway_integrations.HttpLambdaIntegration(
+        "ProfileIntegration",
+        welcomeLambda,
+      ),
+    });
   }
 }

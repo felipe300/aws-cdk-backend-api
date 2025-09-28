@@ -8,3 +8,5 @@ cdk.out
 # IDEs and other ignored files
 .DS_Store
 *.log
+
+*.env

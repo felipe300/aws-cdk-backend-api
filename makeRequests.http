@@ -16,3 +16,8 @@ Content-Type: application/json
 {
   "username": "John Doe"
 }
+
+
+### Welcome Route
+
+GET {{URL}}/welcome HTTP/1.1
